@@ -6,3 +6,6 @@ import App from './App';
 // It also ensures that whether you load the app in the Expo client or in a native build,
 // the environment is set up appropriately
 registerRootComponent(App);
+if(__DEV__) {
+    import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
+  }
