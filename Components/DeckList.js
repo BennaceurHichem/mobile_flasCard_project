@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View,StyleSheet,Button } from 'react-native'
 import {getDecks,saveDeckTitle,getDeck} from '../helpers/api'
-export default class DeckList extends Component {
+import { connect } from 'react-redux';
+import { handleInitialData } from '../actions/index';
+import Deck from './Deck'
+ class DeckList extends Component {
 
 
     constructor(props) {
@@ -13,36 +16,24 @@ export default class DeckList extends Component {
             }
         }
 
-    componentDidMount(){
+        componentDidMount() {
+          handleInitialData()  
+          }
 
-        getDecks().then(result => {
-            console.log(JSON.stringify(result));
-            this.setState(() => ({
-                decks: result
-            }));
-          });
-   
-      
-    }
 
 
     render() {
+            const {decks } = this.props
 
 
-        const {decks } = this.state
         return (
             <View>
-                    <Text>List of all decks </Text>
-        
-          { Object.keys(decks).map((deck,index)=>{
-                <View>
+                    <Text>List of all  </Text>
+   
+          { Object.values(this.props.decks).map((deck)=>{
 
 
-                <Text>{deck.title}</Text>
-                <Text>{JSON.stringify(deck[index])}</Text>
-
-                </View>
-
+               return <Deck id={deck.title? deck.title:"title"}/>
           })
 
 
@@ -64,3 +55,16 @@ export default class DeckList extends Component {
 const styles = StyleSheet.create({
     
 })
+const mapStateToProps = state=>(
+    {
+        
+        decks:state
+    
+    
+    });
+
+export default connect(mapStateToProps, { handleInitialData })(DeckList) 
+
+
+
+
