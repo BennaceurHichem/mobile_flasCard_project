@@ -81,9 +81,9 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     // flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    // alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+ alignItems: 'center',
     // width: '100%',
     marginBottom: 20
   },
