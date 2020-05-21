@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View,StyleSheet,Button } from 'react-native'
+import { Text, View,StyleSheet,Button,ScrollView,TouchableOpacity } from 'react-native'
 import {getDecks,saveDeckTitle,getDeck} from '../helpers/api'
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/index';
@@ -17,7 +17,8 @@ import Deck from './Deck'
         }
 
         componentDidMount() {
-          handleInitialData()  
+        
+          this.props.handleInitialData()  
           }
 
 
@@ -27,25 +28,24 @@ import Deck from './Deck'
 
 
         return (
-            <View>
-                    <Text>List of all  </Text>
-   
-          { Object.values(this.props.decks).map((deck)=>{
+<>
+<Text style={styles.bigTitle} >List of all Decks </Text>
+<ScrollView style={styles.container} >
+                   
+    
+                   { Object.values(this.props.decks).map((deck)=>{
+         
+         
+                        return <Deck id={deck.title? deck.title:"title"}/>
+                   })
+        
+         
+                   }
+         
+                     </ScrollView>
+</>
 
-
-               return <Deck id={deck.title? deck.title:"title"}/>
-          })
-
-
-
-          }
-
-
-
-
-
-            
-            </View>
+         
         )
     }
 }
@@ -53,7 +53,20 @@ import Deck from './Deck'
 
 
 const styles = StyleSheet.create({
+
+    bigTitle:{
+        textAlign: 'center',
+        fontSize:40,
+        marginTop:40,
+        color: 'orange',
+        padding: 30,
+        fontStyle:"italic",
+
+
     
+      
+
+},
 })
 const mapStateToProps = state=>(
     {
