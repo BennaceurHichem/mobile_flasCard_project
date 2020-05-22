@@ -4,6 +4,8 @@ import {getDecks,saveDeckTitle,getDeck} from '../helpers/api'
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/index';
 import Deck from './Deck'
+//import { withNavigation } from 'react-navigation'
+//import { useNavigation } from '@react-navigation/native';
  class DeckList extends Component {
 
 
@@ -24,8 +26,7 @@ import Deck from './Deck'
 
 
     render() {
-            const {decks } = this.props
-
+            const {decks,navigation  } = this.props
 
         return (
 <>
@@ -36,7 +37,14 @@ import Deck from './Deck'
                    { Object.values(this.props.decks).map((deck)=>{
          
          
-                        return <Deck id={deck.title? deck.title:"title"}/>
+                        return  <TouchableOpacity
+              key={deck.title}
+              onPress={() =>
+                this.props.navigation.navigate('DeckDetail', { title: deck.title })
+              }
+            >
+         <Deck id={deck.title? deck.title:"React"}/>
+            </TouchableOpacity>
                    })
         
          
@@ -68,7 +76,7 @@ const styles = StyleSheet.create({
 
 },
 })
-const mapStateToProps = state=>(
+const mapStateToProps = (state)=>(
     {
         
         decks:state
@@ -76,7 +84,7 @@ const mapStateToProps = state=>(
     
     });
 
-export default connect(mapStateToProps, { handleInitialData })(DeckList) 
+export default connect(mapStateToProps, { handleInitialData })(DeckList)
 
 
 
