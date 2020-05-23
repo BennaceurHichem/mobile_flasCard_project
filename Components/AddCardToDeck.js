@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, StyleSheet,TouchableOpacity } from 'react-native';
 
-import { gray, green, lightBlue } from '../helpers/colors';
+import { gray, green, lightBlue, white } from '../helpers/colors';
 import { connect } from 'react-redux';
 import { addCardToDeck } from '../actions/index';
 import { addCardToDeckAsync } from '../helpers/api';
 
  class AddCardToDeck extends Component {
+
 
     state = {
         question: '',
@@ -34,6 +35,10 @@ import { addCardToDeckAsync } from '../helpers/api';
         navigation.goBack();
       };
     render() {
+
+      const { navigation } = this.props;
+
+
         return (
             <View style={styles.container}>
             <View>
@@ -66,11 +71,11 @@ import { addCardToDeckAsync } from '../helpers/api';
                 />
               </View>
               <TouchableOpacity
-                style={{ backgroundColor: lightBlue, borderColor: '#fff' }}
+                style={styles.submitBtn}
                 onPress={this.handleSubmit}
                 disabled={this.state.question === '' || this.state.answer === ''}
               >
-                <Text>Submit</Text>
+                <Text style={styles.submitTxt}>Submit</Text>
               </TouchableOpacity>
             </View>
             <View style={{ height: '30%' }} />
@@ -104,7 +109,22 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       fontSize: 20,
       height: 40
-    }
+    },
+    submitBtn:{
+     backgroundColor: "black", borderColor: 'black',borderRadius:5,color:white, paddingTop: 4,
+    paddingBottom: 4,
+    paddingRight: 25,
+    paddingLeft: 25,
+    width:300,alignSelf:"center"
+  },
+
+
+  submitTxt:{
+    fontSize:30,
+    alignSelf:"center",
+    borderColor:"black",
+    color:white
+  }
   });
   
   const mapStateToProps = (state, { navigation }) => {

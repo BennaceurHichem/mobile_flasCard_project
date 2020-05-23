@@ -41,6 +41,7 @@ import Deck from './Deck'
               key={deck.title}
               onPress={() =>
                 this.props.navigation.navigate('DeckDetail', { title: deck.title })
+              
               }
             >
          <Deck id={deck.title? deck.title:" Title nt found"}/>

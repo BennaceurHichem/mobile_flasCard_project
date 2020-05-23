@@ -112,29 +112,29 @@ export class AndroidQuizVersion extends Component {
           </View>
           <View>
             <TouchableOpacity
-              style={{ backgroundColor: white, borderColor: white }}
+              style={[styles.submitBtn,{backgroundColor:"black"}]}
               onPress={this.reset}
             >
-              <Text>Restart Quiz</Text>
+              <Text style={styles.submitTxt}>Restart Quiz</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={{ backgroundColor: gray, borderColor: textGray }}
+              style={[styles.submitBtn,{backgroundColor:darkGray}]}
             
               onPress={() => {
                 this.reset();
                 this.props.navigation.goBack();
               }}
             >
-              <Text>Back To Deck</Text>
+              <Text style={styles.submitTxt}>Back To Deck</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={{ backgroundColor: gray, borderColor: textGray }}
+              style={[styles.submitBtn,{backgroundColor:gray}]}
               onPress={() => {
                 this.reset();
                 this.props.navigation.navigate('Home');
               }}
             >
-              <Text>Home</Text>
+              <Text style={styles.submitTxt}>Home</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -186,18 +186,18 @@ export class AndroidQuizVersion extends Component {
             )}
             <View style={styles.box}>
               <TouchableOpacity
-              style={[styles.buttonStyle,{backgroundColor:"#0e1318"}]}
+              style={[styles.submitBtn,{backgroundColor:"green"}]}
                 onPress={() => this.handleAnswer(answer.CORRECT, idx)}
                 disabled={this.state.answered[idx] === 1}
               >
-                <Text styles={styles.textStyle}>Correct</Text>
+                <Text style={styles.submitTxt}>Correct</Text>
               </TouchableOpacity>
               <TouchableOpacity
-              style={[styles.buttonStyle,{backgroundColor:"#ff3516"}]}
+              style={[styles.submitBtn,{marginTop:25,backgroundColor:"red"}]}
                 onPress={() => this.handleAnswer(answer.INCORRECT, idx)}
                 disabled={this.state.answered[idx] === 1}
               >
-                <Text styles={[styles.textStyle]}>Incorrect</Text>
+                <Text style={[styles.submitTxt,{color:white}]}>Incorrect</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -247,9 +247,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   questionText: {
-    textDecorationLine: 'underline',
+    fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 35,
     color:"black"
   },
 
@@ -287,6 +287,7 @@ const styles = StyleSheet.create({
         width: 300,
         
       },
+
   correctAnswerStyle: {
     color: green,
     fontSize: 46,
@@ -296,6 +297,28 @@ const styles = StyleSheet.create({
     color: red,
     fontSize: 46,
     textAlign: 'center'
+  },
+      submitBtn:{
+     backgroundColor: "black", 
+     borderColor: 'black',
+     borderRadius:5,
+     color:white, 
+     paddingTop: 4,
+    paddingBottom: 4,
+    paddingRight: 25,
+    paddingLeft: 25,
+    width:300,
+    height:50,
+    marginTop:20,
+    marginBottom:20,
+    alignSelf:"center"
+  },
+
+
+  submitTxt:{
+    fontSize:30,
+    alignSelf:"center",
+    color:"white"
   }
 });
 

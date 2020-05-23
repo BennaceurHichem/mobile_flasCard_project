@@ -14,6 +14,19 @@ import Icon from 'react-native-vector-icons/FontAwesome';
  class DeckDetail extends Component {
 
 
+
+  static navigationOptions = ({ navigation }) => {
+    const title = navigation.getParam('title', '');
+
+   
+    return {
+      title: `${title} deck`
+    };
+  };
+
+
+
+
     handleDelete = id => {
         const { removeDeck, navigation } = this.props;
     
@@ -28,6 +41,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
     render() {
         const { deck } = this.props;
+        const { navigation } = this.props;
 
 
 
@@ -52,7 +66,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
               style={[styles.buttonStyle,{backgroundColor:"#0e1318"}]}
              
                 onPress={() =>
-                  this.props.navigation.navigate('Quiz', { title: deck ? deck.title:"React" })
+                  this.props.navigation.navigate('Quiz', { title: deck.title ? deck.title:"NOT FOUND" })
                 }
                 
               >
