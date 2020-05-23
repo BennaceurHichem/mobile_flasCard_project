@@ -40,9 +40,9 @@ import {
                      }
                 };
                 case REMOVE_DECK:
-                    const { id } = action;
+                    const { keyDeck } = action;
                     //destrcutur then take only the excepted decks
-                    const { [id]: value, ...restOfecks } = state;
+                    const { [keyDeck]: value, ...restOfecks } = state;
                     console.log(restOfecks);
                     return restOfecks;
                 

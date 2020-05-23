@@ -48,10 +48,10 @@ export function addCardToDeck(key, card) {
   }
 
   
-export function removeDeck(key){
+export function removeDeck(keyDeck){
     return{
         type:REMOVE_DECK,
-        key
+        keyDeck
     };
 
 

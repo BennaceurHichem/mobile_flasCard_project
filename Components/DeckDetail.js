@@ -22,7 +22,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
     
         navigation.goBack();
       };
-
+      shouldComponentUpdate(nextProps) {
+        return nextProps.deck !== undefined;
+      }
 
     render() {
         const { deck } = this.props;
