@@ -43,7 +43,7 @@ import Deck from './Deck'
                 this.props.navigation.navigate('DeckDetail', { title: deck.title })
               }
             >
-         <Deck id={deck.title? deck.title:"React"}/>
+         <Deck id={deck.title? deck.title:" Title nt found"}/>
             </TouchableOpacity>
                    })
         

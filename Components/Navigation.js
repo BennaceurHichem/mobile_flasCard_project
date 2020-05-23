@@ -13,7 +13,7 @@ import DeckDetail from './DeckDetail';
 import AddCardToDeck from './AddCardToDeck';
 import Quiz from './Quiz';
 
-import { darkGray, white, green, lightGreen } from '../helpers/colors';
+import { darkGray, white, lightBlue, blue } from '../helpers/colors';
 import { createAppContainer } from 'react-navigation';
 
 const isAndroid = Platform.OS === 'android' ? true : false;
@@ -52,7 +52,7 @@ const tabConfig = {
       bounces: true
     },
     tabBarOptions: {
-      activeTintColor: green,
+      activeTintColor: lightBlue,
       style: {
         height: 60,
         backgroundColor: white,
@@ -97,9 +97,9 @@ const Navigation = createStackNavigator(
       DeckDetail: {
         screen: DeckDetail,
         navigationOptions: {
-          headerTintColor: green,
+          headerTintColor: white,
           headerStyle: {
-            backgroundColor: lightGreen
+            backgroundColor: lightBlue
           },
           title: 'Deck Details'
         }
@@ -107,9 +107,9 @@ const Navigation = createStackNavigator(
       AddCardToDeck: {
         screen: AddCardToDeck,
         navigationOptions: {
-          headerTintColor: green,
+          headerTintColor: white,
           headerStyle: {
-            backgroundColor: lightGreen
+            backgroundColor: lightBlue
           },
           headerTitleStyle: {
             justifyContent: 'center',
@@ -121,9 +121,9 @@ const Navigation = createStackNavigator(
       Quiz: {
         screen: Quiz,
         navigationOptions: {
-          headerTintColor: green ,
+          headerTintColor: white ,
           headerStyle: {
-            backgroundColor: lightGreen
+            backgroundColor: lightBlue
           }
      
         }

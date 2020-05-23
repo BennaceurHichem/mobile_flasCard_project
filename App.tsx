@@ -25,7 +25,7 @@ const store = createStore(
   applyMiddleware(thunk, logger)
 );
 
-function FlashcardStatusBar({ backgroundColor, ...props }) {
+function MainStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
@@ -39,7 +39,7 @@ export default function App() {
     <Provider store={store}>
 
         
-        <FlashcardStatusBar
+        <MainStatusBar
           backgroundColor="blue"
           barStyle="light-content"
         />

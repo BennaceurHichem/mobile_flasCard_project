@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, StyleSheet,TouchableOpacity } from 'react-native';
 
-import { gray, green } from '../helpers/colors';
+import { gray, green, lightBlue } from '../helpers/colors';
 import { connect } from 'react-redux';
 import { addCardToDeck } from '../actions/index';
 import { addCardToDeckAsync } from '../helpers/api';
@@ -66,7 +66,7 @@ import { addCardToDeckAsync } from '../helpers/api';
                 />
               </View>
               <TouchableOpacity
-                style={{ backgroundColor: green, borderColor: '#fff' }}
+                style={{ backgroundColor: lightBlue, borderColor: '#fff' }}
                 onPress={this.handleSubmit}
                 disabled={this.state.question === '' || this.state.answer === ''}
               >

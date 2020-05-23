@@ -4,7 +4,7 @@ import {
   getDecks,
   getDeck,
   saveDeckTitle,
-  addCardToDeck,
+  addCardToDeckAsync,
   clearDecks
 } from '../helpers/api.js';
 
@@ -35,7 +35,7 @@ export default class TestAsyncStorage extends React.Component {
     saveDeckTitle('Next.js');
   };
   handleAddCard = () => {
-    addCardToDeck('Next.js', {
+    addCardToDeckAsync('Next.js', {
       question: 'server-sider-endering?',
       answer: 'client side rendering'
     });
