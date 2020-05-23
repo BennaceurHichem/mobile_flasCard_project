@@ -16,16 +16,16 @@ import Quiz from './Quiz';
 import { darkGray, white, green, lightGreen } from '../helpers/colors';
 import { createAppContainer } from 'react-navigation';
 
-const isIOS = Platform.OS === 'ios' ? true : false;
+const isAndroid = Platform.OS === 'android' ? true : false;
 
-const routeConfigs = {
+const globalConfig = {
     Decks: {
       screen: DeckList,
       navigationOptions: {
         tabBarLabel: 'Decks',
         tabBarIcon: ({ tintColor }) => (
           <Icon.Ionicons
-            name={isIOS ? 'ios-bookmarks' : 'md-bookmarks'}
+            name={isAndroid ? 'md-bookmarks':'ios-bookmarks'}
             size={30}
             color={tintColor}
           />
@@ -44,7 +44,7 @@ const routeConfigs = {
   
   };
 
-const tabNavigatorConfig = {
+const tabConfig = {
     navigationOptions: {
       header: null
     },
@@ -87,7 +87,7 @@ const tabNavigatorConfig = {
 
 
 
-const Tabs = createBottomTabNavigator(routeConfigs, tabNavigatorConfig);
+const Tabs = createBottomTabNavigator(globalConfig, tabConfig);
 
 const Navigation = createStackNavigator(
     {
@@ -115,7 +115,7 @@ const Navigation = createStackNavigator(
             justifyContent: 'center',
             textAlign: 'center'
           },
-          title: 'Add Card'
+          title: 'Add Card To Deck'
         }
       },
       Quiz: {

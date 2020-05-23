@@ -65,10 +65,11 @@ const styles = StyleSheet.create({
     bigTitle:{
         textAlign: 'center',
         fontSize:40,
-        marginTop:40,
-        color: 'orange',
+        marginTop:10,
+        color: 'black',
         padding: 30,
         fontStyle:"italic",
+        fontWeight:"bold"
 
 
     

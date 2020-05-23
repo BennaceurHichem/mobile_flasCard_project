@@ -16,7 +16,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import Reactotron from 'reactotron-react-native'
 import Constants from 'expo-constants';
-
+import AddDeck from './Components/AddDeck'
 
 import Navigation from './Components/Navigation'
 /*🔥store Creation with reducers and Middleware🔥 */
@@ -38,26 +38,22 @@ export default function App() {
 
     <Provider store={store}>
 
-        <View style={styles.container}>
+        
         <FlashcardStatusBar
           backgroundColor="blue"
           barStyle="light-content"
         />
 
-
-          <Navigation />
-        </View>
-
+  
+         
+      
+        <Navigation />
     </Provider>
+
+    
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 
 });

@@ -1,44 +1,125 @@
-import React, { Component } from 'react'
-import { Text, View,StyleSheet,TouchableOpacity,ButtonToolbar,Button } from 'react-native'
-import Deck from './Deck'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { View, StyleSheet,TouchableOpacity,Text } from 'react-native';
+import Deck from './Deck';
+
+import { gray, textGray, green, white, red } from '../helpers/colors';
+import { connect } from 'react-redux';
+import { removeDeck } from '../actions/index';
+import { removeDeckAsync } from '../helpers/api';
+import { NavigationActions } from 'react-navigation';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
  class DeckDetail extends Component {
+
+
+    handleDelete = id => {
+        const { removeDeck, navigation } = this.props;
+    
+        removeDeck(id);
+        removeDeckAsync(id);
+    
+        navigation.goBack();
+      };
+
+
     render() {
+        const { deck } = this.props;
+
+
+
         return (
-            <Deck id="React" />
+            <View style={styles.container}>
+            <View style= {{marginTop:40}}>
+            <Deck id={deck ? deck.title:"UNDEFINED"} />
+
+            </View>
+            <View style={styles.box}>
+              <TouchableOpacity
+                 style={[styles.buttonStyle,{backgroundColor:"#0e1318"}]}
+                onPress={() =>
+                  this.props.navigation.navigate('AddCardToDeck', { title: deck ? deck.title:"React" })
+                }
+              
+
+              >
+                 <Text    style={[styles.textStyle]}>Add Card</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+              style={[styles.buttonStyle,{backgroundColor:"#0e1318"}]}
+             
+                onPress={() =>
+                  this.props.navigation.navigate('Quiz', { title: deck ? deck.title:"React" })
+                }
+                
+              >
+             <Text  style={styles.textStyle}>Start Quiz</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+              style={[styles.buttonStyle,{backgroundColor:"#ff3516"}]}
+              onPress={() => this.handleDelete(deck ? deck.title:"React")}              
+            >
+                <Text    style={styles.textStyle}>Delete Deck</Text>
+            </TouchableOpacity>
+
+
+            </View>
+          
+          </View>
         )
     }
 }
 const styles = StyleSheet.create({
-    container:{
-      flex:1,
-      flexDirection : 'column',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      borderRadius:20,
-      borderColor:'black',
-      marginTop:10,
-      marginBottom:10,
-      borderWidth: 1,
-      borderColor: '#428947',
-      paddingLeft:80,
-      paddingRight: 80,
- 
+    container: {
+      flex: 1,
+    
+      paddingTop: 16,
+      paddingLeft: 16,
+      paddingRight: 16,
+      paddingBottom: 16,
+      backgroundColor: gray
+    },
+    box:{
+
+        marginTop:260,
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    textStyle: {
+        alignSelf: 'center',
+        color: 'white',
+        fontSize: 24,
+        fontWeight: '600',
+        paddingTop: 10,
+        paddingBottom: 10,
    
-
-    },
-    titleDeck:{
-            fontSize:40,
-            color:'black',
-
-
-    },
-    numberDecks:{
-        fontSize:20,
+      },
+      buttonStyle: {
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#336633',
+        paddingTop: 4,
+        paddingBottom: 4,
+        paddingRight: 25,
+        paddingLeft: 25,
+        marginTop: 10,
+        width: 300,
         
-        color:'black',
-    }
-})
-
-
-
-export default DeckDetail;
+      }
+  });
+  
+  const mapStateToProps = (state, { navigation }) => {
+    const title = navigation? navigation.getParam('title', 'undefined'):"defaultTitle";
+    const deck = state[title];
+  
+    return {
+      deck
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    { removeDeck }
+  )(DeckDetail);

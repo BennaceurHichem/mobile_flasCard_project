@@ -109,22 +109,22 @@ export async function clearDecks() {
   }
 }
 
-
-export async function removeAsync(id){
-
-  try {
-
     /*
     1.get al items 
     2.delete the specific item 
     3.push again the new data
 
     */
+export async function removeDeckAsync(key){
+
+  try {
+
+
     const storeResults = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
 
     const all = JSON.parse(storeResults)
 
-    all[id] = undefined;
+    all[key] = undefined;
     delete all[key];
     AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(all));
 
@@ -155,7 +155,7 @@ export async function removeAsync(id){
 
 */
 
-export async function addCardToDeck(title,card){
+export async function addCardToDeckAsync(title,card){
 
       
       

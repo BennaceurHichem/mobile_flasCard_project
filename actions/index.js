@@ -14,7 +14,7 @@ export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const ADD_DECK = 'ADD_DECK'
 export const REMOVE_DECK = 'REMOVE_DECK';
 export const ADD_CARD = 'ADD_CARD';
-
+export const RESET_STORE = 'RESET_STORE';
 
 export function receiveDecks(decks){
 return {
@@ -23,7 +23,11 @@ return {
 };
 
 }
-
+export function resetStore() {
+    return {
+      type: RESET_STORE
+    };
+  }
 
 export function addDeck(title){
     return{
@@ -47,7 +51,6 @@ export function addCardToDeck(key, card) {
 export function removeDeck(key){
     return{
         type:REMOVE_DECK,
-        //id is the title 
         key
     };
 

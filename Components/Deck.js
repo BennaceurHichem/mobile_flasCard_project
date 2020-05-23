@@ -31,16 +31,15 @@ const styles = StyleSheet.create({
     container:{
       flex:1,
       flexDirection : 'column',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      justifyContent:"flex-start",
+      alignItems:"center",
       borderRadius:20,
       borderColor:'black',
       marginTop:10,
       marginBottom:10,
       borderWidth: 1,
-      borderColor: '#428947',
-      paddingLeft:80,
-      paddingRight: 80,
+      paddingLeft:20,
+      paddingRight: 20,
  
    
 
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
     titleDeck:{
             fontSize:40,
             color:'black',
+            
 
 
     },
