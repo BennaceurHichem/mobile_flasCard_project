@@ -7,13 +7,9 @@ import PropTypes from 'prop-types';
 
  class DeckList extends Component {
 
-    static propTypes = {
-        navigation: PropTypes.object.isRequired,
-        handleInitialData: PropTypes.func.isRequired,
-        decks: PropTypes.object.isRequired
-      };
+ 
 
-      
+
     constructor(props) {
         super(props)
             this.state={
@@ -90,6 +86,9 @@ const mapStateToProps = (state)=>(
     
     
     });
+
+
+
 
 export default connect(mapStateToProps, { handleInitialData })(DeckList)
 

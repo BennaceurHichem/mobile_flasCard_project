@@ -6,9 +6,7 @@ import PropTypes from 'prop-types';
 import Constants from 'expo-constants';
 
 export default class Quiz extends Component {
-    static propTypes = {
-        navigation: PropTypes.object.isRequired
-      };
+  
 
     static navigationOptions = ({ navigation }) => {
         const title = navigation.getParam('title', '');

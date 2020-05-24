@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Text, View, StyleSheet, TextInput,TouchableOpacity } from 'react-native';
 import { gray, green, white, textGray } from '../helpers/colors';
 import { connect } from 'react-redux';
@@ -10,10 +9,7 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export class AddDeck extends Component {
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    addDeck: PropTypes.func.isRequired
-  };
+ 
   state = {
     deckTitle: ''
   };

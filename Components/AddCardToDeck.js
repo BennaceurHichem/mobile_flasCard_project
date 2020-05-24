@@ -9,11 +9,6 @@ import { addCardToDeckAsync } from '../helpers/api';
 
  class AddCardToDeck extends Component {
 
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
-    addCardToDeck: PropTypes.func.isRequired
-  };
     state = {
         question: '',
         answer: ''
