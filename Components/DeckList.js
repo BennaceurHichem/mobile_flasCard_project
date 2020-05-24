@@ -3,11 +3,17 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/index';
 import Deck from './Deck';
-//import { withNavigation } from 'react-navigation'
-//import { useNavigation } from '@react-navigation/native';
+import PropTypes from 'prop-types';
+
  class DeckList extends Component {
 
+    static propTypes = {
+        navigation: PropTypes.object.isRequired,
+        handleInitialData: PropTypes.func.isRequired,
+        decks: PropTypes.object.isRequired
+      };
 
+      
     constructor(props) {
         super(props)
             this.state={

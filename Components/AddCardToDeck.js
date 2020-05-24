@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, StyleSheet,TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { gray, green, lightBlue, white } from '../helpers/colors';
 import { connect } from 'react-redux';
@@ -8,7 +9,11 @@ import { addCardToDeckAsync } from '../helpers/api';
 
  class AddCardToDeck extends Component {
 
-
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
+    addCardToDeck: PropTypes.func.isRequired
+  };
     state = {
         question: '',
         answer: ''

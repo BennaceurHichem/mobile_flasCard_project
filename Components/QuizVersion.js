@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, ScrollView, Dimensions,TouchableOpacity } from 
 import { gray, green, red, textGray, darkGray, white } from '../helpers/colors';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
+import PropTypes from 'prop-types';
 
 const screen = {
   QUESTION: 'question',

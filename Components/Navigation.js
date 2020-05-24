@@ -12,9 +12,11 @@ import AddDeck from './AddDeck';
 import DeckDetail from './DeckDetail';
 import AddCardToDeck from './AddCardToDeck';
 import Quiz from './Quiz';
-
 import { darkGray, white, lightBlue, blue } from '../helpers/colors';
 import { createAppContainer } from 'react-navigation';
+
+
+import PropTypes from 'prop-types';
 
 const isAndroid = Platform.OS === 'android' ? true : false;
 

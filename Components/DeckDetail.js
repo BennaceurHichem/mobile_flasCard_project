@@ -13,7 +13,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
  class DeckDetail extends Component {
 
-
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+    removeDeck: PropTypes.func.isRequired,
+    deck: PropTypes.object
+  };
 
   static navigationOptions = ({ navigation }) => {
     const title = navigation.getParam('title', '');
