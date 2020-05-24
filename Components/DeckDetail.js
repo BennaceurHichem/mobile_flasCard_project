@@ -48,6 +48,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
         return (
             <View style={styles.container}>
             <View style= {{marginTop:40}}>
+          {/*
+          
+            thi Deck component is the responsible of displaying the deck title and their card numbers 
+            it works correctly for me 
+          */}
             <Deck id={deck ? deck.title:"UNDEFINED"} />
 
             </View>

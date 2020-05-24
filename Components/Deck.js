@@ -15,7 +15,7 @@ import {connect} from 'react-redux'
         return (
             <View>
               <View style={styles.container}>
-                        <Text style={styles.titleDeck}>{deck?deck.title:"title not found"}</Text>
+                        <Text style={styles.titleDeck}>{deck?deck.title:''}</Text>
                     
                     <View>
                         <Text style={styles.numberDecks}>{deck?deck.questions.length:"0"} cards🃏</Text>

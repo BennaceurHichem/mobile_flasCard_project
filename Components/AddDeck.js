@@ -20,6 +20,15 @@ export class AddDeck extends Component {
   handleSubmit = () => {
     const { addDeck, navigation } = this.props;
    
+
+
+    /*
+
+    when the button is sbubmitted everything is right
+     because I disabled the button if the decktitle is empty 
+    so these two functions which will create new deck will handled only
+     when the deck title is not empty(which is the only condition cited)
+    */
         addDeck(this.state.deckTitle);
         saveDeckTitle(this.state.deckTitle);
     

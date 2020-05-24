@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet, ScrollView, Dimensions,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList,ScrollView, Dimensions,TouchableOpacity } from 'react-native';
 import { gray, green, red, textGray, darkGray, white } from '../helpers/colors';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';

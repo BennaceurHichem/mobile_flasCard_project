@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet,TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, StyleSheet,TouchableOpacity,KeyboardAvoidingView  } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { gray, green, lightBlue, white } from '../helpers/colors';
@@ -40,9 +40,10 @@ import { addCardToDeckAsync } from '../helpers/api';
 
 
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container}>
             <View>
               <View style={styles.block}>
+              
                 <Text style={styles.title}>Add a question</Text>
               </View>
               <View style={[styles.block]}>
@@ -79,7 +80,7 @@ import { addCardToDeckAsync } from '../helpers/api';
               </TouchableOpacity>
             </View>
             <View style={{ height: '30%' }} />
-          </View>
+          </KeyboardAvoidingView>
         )
     }
 }
