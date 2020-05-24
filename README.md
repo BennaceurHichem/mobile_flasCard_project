@@ -25,9 +25,10 @@ Use your device to test:
 <li>or click on android/ios emulator</li>
 </ul>
 
-
-
-
+# Testing
+This project has been tested on the following platforms:
+iOS 11+
+Android 9+.
 
 
 
