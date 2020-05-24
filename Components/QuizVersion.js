@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-
-import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
-import ViewPager from '@react-native-community/viewpager'
-import { gray, white,green, red, textGray, darkGray } from '../helpers/colors';
+import PropTypes from 'prop-types';
+import { View, Text, StyleSheet, ScrollView, Dimensions,TouchableOpacity } from 'react-native';
+import { gray, green, red, textGray, darkGray, white } from '../helpers/colors';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import PropTypes from 'prop-types';
+
 const screen = {
   QUESTION: 'question',
   ANSWER: 'answer',
@@ -15,22 +14,18 @@ const answer = {
   CORRECT: 'correct',
   INCORRECT: 'incorrect'
 };
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
-/*
-The use of ViewPager for android and make the difference between these two platfrom in ViewPager
-is reccomended so I opt for it 
-
-*/
-export class AndroidQuizVersion extends Component {
-
+class QuizVersion extends Component {
+ 
   state = {
     show: screen.QUESTION,
     correct: 0,
     incorrect: 0,
-    counter: this.props.deck.questions.length,
+    questionCount: this.props.deck.questions.length,
     answered: Array(this.props.deck.questions.length).fill(0)
   };
-  handlePageChange = evt => {
+  scrollEvent = () => {
     this.setState({
       show: screen.QUESTION
     });
@@ -47,13 +42,14 @@ export class AndroidQuizVersion extends Component {
       }),
       () => {
         // console.log('this.state.answered', this.state.answered);
-        const { correct, incorrect, counter } = this.state;
+        const { correct, incorrect, questionCount } = this.state;
 
-        if (counter === correct + incorrect) {
+        if (questionCount === correct + incorrect) {
           this.setState({ show: screen.RESULT });
         } else {
-          // console.log('this.state.page', this.state.page);
-          this.viewPager.setPage(page + 1);
+          // this.viewPager.setPage(this.state.page + 1);
+          this.scrollView.scrollTo({ x: (page + 1) * SCREEN_WIDTH });
+          // console.log('(page + 1) * SCREEN_WIDTH', (page + 1) * SCREEN_WIDTH);
           this.setState(prevState => ({
             show: screen.QUESTION
           }));
@@ -66,7 +62,7 @@ export class AndroidQuizVersion extends Component {
       show: screen.QUESTION,
       correct: 0,
       incorrect: 0,
-      answered: Array(prevState.counter).fill(0)
+      answered: Array(prevState.questionCount).fill(0)
     }));
   };
   render() {
@@ -75,7 +71,7 @@ export class AndroidQuizVersion extends Component {
 
     if (questions.length === 0) {
       return (
-        <View style={styles.mainBox}>
+        <View style={styles.pageStyle}>
           <View style={styles.block}>
             <Text style={[styles.count, { textAlign: 'center' }]}>
               You cannot take a quiz because there are no cards in the deck.
@@ -89,19 +85,19 @@ export class AndroidQuizVersion extends Component {
     }
 
     if (this.state.show === screen.RESULT) {
-      const { correct, counter } = this.state;
-      const percent = ((correct / counter) * 100).toFixed(0);
+      const { correct, questionCount } = this.state;
+      const percent = ((correct / questionCount) * 100).toFixed(0);
       const resultStyle =
-        percent >= 70 ? styles.correctAnswerStyle : styles.wrongAnswerStyle;
+        percent >= 70 ? styles.correctAnswer : styles.wrongAnswer;
 
       return (
-        <View style={styles.mainBox}>
+        <View style={styles.pageStyle}>
           <View style={styles.block}>
             <Text style={[styles.count, { textAlign: 'center' }]}>
               Quiz Complete!
             </Text>
             <Text style={resultStyle}>
-              {correct} / {counter} correct
+              {correct} / {questionCount} correct
             </Text>
           </View>
           <View style={styles.block}>
@@ -111,7 +107,7 @@ export class AndroidQuizVersion extends Component {
             <Text style={resultStyle}>{percent}%</Text>
           </View>
           <View>
-            <TouchableOpacity
+          <TouchableOpacity
               style={[styles.submitBtn,{backgroundColor:"black"}]}
               onPress={this.reset}
             >
@@ -128,7 +124,7 @@ export class AndroidQuizVersion extends Component {
               <Text style={styles.submitTxt}>Back To Deck</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.submitBtn,{backgroundColor:gray}]}
+              style={[styles.submitBtn,{backgroundColor:darkGray}]}
               onPress={() => {
                 this.reset();
                 this.props.navigation.navigate('Home');
@@ -142,16 +138,17 @@ export class AndroidQuizVersion extends Component {
     }
 
     return (
-      <ViewPager
+      <ScrollView
         style={styles.container}
-        scrollEnabled={true}
-        onPageSelected={this.handlePageChange}
-        ref={viewPager => {
-          this.viewPager = viewPager;
+        pagingEnabled={true}
+        horizontal={true}
+        onMomentumScrollBegin={this.scrollEvent}
+        ref={scrollView => {
+          this.scrollView = scrollView;
         }}
       >
         {questions.map((question, idx) => (
-          <View style={styles.mainBox} key={idx}>
+          <View style={styles.pageStyle} key={idx}>
             <View style={styles.block}>
               <Text style={styles.count}>
                 {idx + 1} / {questions.length}
@@ -171,7 +168,7 @@ export class AndroidQuizVersion extends Component {
             </View>
             {show === screen.QUESTION ? (
               <TouchableOpacity
-                style={{ color: red }}
+                style={{ color: red,marginTop:20,marginBottom:0 }}
                 onPress={() => this.setState({ show: screen.ANSWER })}
               >
                 <Text style={[styles.textStyle,{color:"black"}]}>Show Answer</Text>
@@ -184,8 +181,8 @@ export class AndroidQuizVersion extends Component {
                 <Text  style={[styles.textStyle,{color:"black"}]}>Show Question</Text>
               </TouchableOpacity>
             )}
-            <View style={styles.box}>
-              <TouchableOpacity
+            <View>
+            <TouchableOpacity
               style={[styles.submitBtn,{backgroundColor:"green"}]}
                 onPress={() => this.handleAnswer(answer.CORRECT, idx)}
                 disabled={this.state.answered[idx] === 1}
@@ -202,7 +199,7 @@ export class AndroidQuizVersion extends Component {
             </View>
           </View>
         ))}
-      </ViewPager>
+      </ScrollView>
     );
   }
 }
@@ -211,14 +208,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  mainBox: {
+  pageStyle: {
     flex: 1,
     paddingTop: 16,
     paddingLeft: 16,
     paddingRight: 16,
     paddingBottom: 16,
-    backgroundColor: "white",
-    justifyContent: 'space-around'
+    backgroundColor: gray,
+    justifyContent: 'space-around',
+    width: SCREEN_WIDTH
   },
   block: {
     marginBottom: 20
@@ -228,8 +226,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    textAlign: 'center',
-    color:"black"
+    textAlign: 'center'
+  },
+  textStyle: {
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 24,
+    fontWeight: '600',
+
+
+
   },
   questionContainer: {
     borderWidth: 1,
@@ -247,87 +253,50 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   questionText: {
-    fontWeight: 'bold',
+    textDecorationLine: 'underline',
     textAlign: 'center',
-    fontSize: 35,
-    color:"black"
+    fontSize: 20
   },
-
-  btnWrapper:{
-      flex:1,
-      alignItems:"center",
-      justifyContent:"center"
-    },
-    box:{
-
-        marginTop:60,
-        marginBottom:20,
-        justifyContent:"center",
-        alignItems:"center"
-    },
-
-    textStyle: {
-        alignSelf: 'center',
-        color: 'white',
-        fontSize: 24,
-        fontWeight: '600',
-        paddingTop: 10,
-        paddingBottom: 10,
-   
-      },
-      buttonStyle: {
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#336633',
-        paddingTop: 4,
-        paddingBottom: 4,
-        paddingRight: 25,
-        paddingLeft: 25,
-        marginTop: 10,
-        width: 300,
-        
-      },
-
-  correctAnswerStyle: {
+  correctAnswer: {
     color: green,
     fontSize: 46,
     textAlign: 'center'
   },
-  wrongAnswerStyle: {
+  wrongAnswer: {
     color: red,
     fontSize: 46,
     textAlign: 'center'
   },
-      submitBtn:{
-     backgroundColor: "black", 
-     borderColor: 'black',
-     borderRadius:5,
-     color:white, 
-     paddingTop: 4,
-    paddingBottom: 4,
-    paddingRight: 25,
-    paddingLeft: 25,
-    width:300,
-    height:50,
-    marginTop:20,
-    marginBottom:20,
-    alignSelf:"center"
-  },
+  submitBtn:{
+    backgroundColor: "black", 
+    borderColor: 'black',
+    borderRadius:5,
+    color:white, 
+    paddingTop: 4,
+   paddingBottom: 4,
+   paddingRight: 25,
+   paddingLeft: 25,
+   width:300,
+   height:50,
+   marginTop:20,
+   marginBottom:20,
+   alignSelf:"center"
+ },
 
 
-  submitTxt:{
-    fontSize:30,
-    alignSelf:"center",
-    color:"white"
-  }
+ submitTxt:{
+   fontSize:30,
+   alignSelf:"center",
+   color:"white"
+ }
 });
 
 const mapStateToProps = (state, { title }) => {
-
+  const deck = state[title];
 
   return {
-    deck:state[title]
+    deck
   };
 };
 
-export default withNavigation(connect(mapStateToProps)(AndroidQuizVersion));
+export default withNavigation(connect(mapStateToProps)(QuizVersion));

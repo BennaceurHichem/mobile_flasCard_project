@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import { Text, View,StyleSheet,Button,ScrollView,TouchableOpacity } from 'react-native'
-import {getDecks,saveDeckTitle,getDeck} from '../helpers/api'
+import React, { Component } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/index';
-import Deck from './Deck'
+import Deck from './Deck';
 //import { withNavigation } from 'react-navigation'
 //import { useNavigation } from '@react-navigation/native';
  class DeckList extends Component {

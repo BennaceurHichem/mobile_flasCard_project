@@ -17,6 +17,7 @@ import { createStore, applyMiddleware } from 'redux';
 import Reactotron from 'reactotron-react-native'
 import Constants from 'expo-constants';
 import AddDeck from './Components/AddDeck'
+import { makeNotification } from './helpers/Notifications';
 
 import Navigation from './Components/Navigation'
 /*🔥store Creation with reducers and Middleware🔥 */
@@ -33,25 +34,35 @@ function MainStatusBar({ backgroundColor, ...props }) {
   );
 }
 
-export default function App() {
-  return (
+export default class  App extends React.Component {
 
-    <Provider store={store}>
+
+  componentDidMount() {
+    //notification should be placed in the componentDidMount
+    makeNotification();
+  }
+
+  render()
+  {
+
+
+    return(
+
+      <Provider store={store}>
 
         
-        <MainStatusBar
-          backgroundColor="blue"
-          barStyle="light-content"
-        />
+              <MainStatusBar
+                backgroundColor="blue"
+                barStyle="light-content"
+              />
 
-  
-         
-      
-        <Navigation />
-    </Provider>
+              <Navigation />
+  </Provider>
 
-    
-  );
+
+    );
+  }
+
 }
 
 const styles = StyleSheet.create({

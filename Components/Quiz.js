@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import AndroidQuizVersion from './AndroidQuizVersion'
-import iosQuizVersion from './iosQuizVersion'
+import QuizVersion from './QuizVersion'
 
 import Constants from 'expo-constants';
 
@@ -16,20 +15,21 @@ export default class Quiz extends Component {
       };
 
 
-      
+
     render() {
         const { navigation } = this.props;
         const title = navigation.getParam('title', '');
      
               
                 
-                    if(Constants.platform.android) {
-                         return <AndroidQuizVersion  title={title}/>
+    
+                        return <QuizVersion  title={title}/>
+                        
 
-                    }else{
-                        return <iosQuizVersion  title={title}/>
-
-                    }
+              
+                       
+                   
+           
 
                 
            
