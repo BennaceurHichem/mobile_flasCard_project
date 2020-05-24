@@ -1,5 +1,17 @@
 # Project Description
 this is the third react  nanodegree project, a mobile flashCard created with react native
+<p float="left">
+   
+   <img src="images/deckList.jpg" width="170px" height="250px">
+   <img src="images/DeckDetail.jpg" width="170px" height="250px">
+
+   <img src="images/addCardToDeck.jpg" width="170px" height="250px">
+   <img src="images/Quiz.jpg" width="170px" height="250px" >
+    <img src="images/Quiz[answer].jpg" width="170px" height="250px" align-self="center">
+<p float="center">
+     <img src="images/endQuiz.jpg" width="170px" height="250px">
+ </p>
+</p>
 
 # Installation
 Clone the repository, change directories, and use npm or yarn to install the dependencies.
