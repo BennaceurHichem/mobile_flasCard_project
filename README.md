@@ -11,7 +11,7 @@ $ cd mobile_flasCard_project
 
 $ npm install `
 
-$ expo start 
+$ expo start // or npm start
 
 </code>
 
