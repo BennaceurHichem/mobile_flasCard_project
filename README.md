@@ -8,9 +8,9 @@ this is the third react  nanodegree project, a mobile flashCard created with rea
    <img src="images/addCardToDeck.jpg" width="170px" height="250px">
    <img src="images/Quiz.jpg" width="170px" height="250px" >
     <img src="images/Quiz[answer].jpg" width="170px" height="250px" align-self="center">
-<p float="center">
-     <img src="images/endQuiz.jpg" width="170px" height="250px">
- </p>
+
+   <img src="images/endQuiz.jpg" width="170px" height="250px">
+
 </p>
 
 # Installation
